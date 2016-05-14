@@ -8,10 +8,7 @@ buildingSchema = new Schema({
     city         : {type:String, required:true},
     zip          : {type:String, required:true}
   },
-  location : {
-                type        : {type:String, default:'Point'},
-                coordinates : [{type:Number}]
-  },
+  buildingType  : {type:String, required:true},
   taxValues : [{
     year        : {type:Number, required:true},
     grossValue  : {type:Number, required:true},
