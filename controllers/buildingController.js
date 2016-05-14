@@ -4,8 +4,10 @@ var buildingController = {
   getIndex : function(req,res){
     Building.find({},function(err,buildings){
       if(!err) res.json(buildings)
-      console.log(`index route - db error: ${err}`)
-      res.json({message: "index route - db error"})
+      if(err){
+        console.log(`index route - db error: ${err}`)
+        res.json({message: "index route - db error"})
+      }
     })
   }
 }

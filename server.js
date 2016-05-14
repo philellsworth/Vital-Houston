@@ -8,8 +8,8 @@ var bodyParser = require('body-parser'),
            app = express(),
           port = process.env.PORT || 3000,
 
-          dbURL = 'mongodb://localhost:27017/buildings',
- buildingRoutes = require(__dirname + '/routes/gearRoutes.js')
+          dbURL = 'mongodb://localhost:27017/vital',
+ buildingRoutes = require(__dirname + '/routes/buildingRoutes.js')
 
  // DB Initialization
  mongoose.connect(dbURL, function(err){
@@ -24,8 +24,8 @@ var bodyParser = require('body-parser'),
 
  // Configure Routing
  // currently lack public files to expose on static server
- // app.use(express.static(`${__dirname}/public`))
- app.use('/user-api/v1/', buildingRoutes)
+ app.use(express.static(`${__dirname}/public`))
+ app.use('/vital-api/v1/', buildingRoutes)
 
  var httpServer = http.createServer(app)
  // Set up Listener

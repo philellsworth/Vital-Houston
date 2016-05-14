@@ -23,4 +23,4 @@ buildingSchema = new Schema({
 
 buildingSchema.index({location:'2dsphere'})
 
-module.exports = mongoose.model('building',buildingSchema)
+module.exports = mongoose.model('Building',buildingSchema)
