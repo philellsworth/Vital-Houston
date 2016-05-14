@@ -1,0 +1,19 @@
+{
+  "name": "vital-houston",
+  "version": "1.0.0",
+  "description": "compare property tax deltas to a variety of different inputs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hdub2/Vital-Houston.git"
+  },
+  "author": "hdub2",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hdub2/Vital-Houston/issues"
+  },
+  "homepage": "https://github.com/hdub2/Vital-Houston#readme"
+}
