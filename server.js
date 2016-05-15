@@ -13,8 +13,8 @@ var bodyParser = require('body-parser'),
 
  // DB Initialization
  mongoose.connect(dbURL, function(err){
-   if(err)  console.log("!- Failed to connect to buildings db.")
-   if(!err) console.log("-- Connected to buildings db.")
+   if(err)  console.log("!- Failed to connect to vital db.")
+   if(!err) console.log("-- Connected to vital db.")
  })
 
  // Standard Middleware

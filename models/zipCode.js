@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
       Schema = require('mongoose').Schema
 
 zipCodeSchema = new Schema({
-  zipCode       : {type:Number, required:true},
+  zipCode       : {type:Number, required:true, unique:true},
   geoJSON       : {type:String},
   // array member - one element per year
   buildingStats : [{
@@ -21,4 +21,4 @@ zipCodeSchema = new Schema({
   }]
 })
 
-module.exports = mongoose.model('ZipCode',zipCodeSchema)
+module.exports = mongoose.model('zipcode',zipCodeSchema)
