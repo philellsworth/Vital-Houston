@@ -8,6 +8,7 @@
 
     navigator.geolocation.getCurrentPosition(function(position){
       mapFactory.buildMap(mc,position.coords)
+      mapFactory.placePolygons(mc)
     })
 
   }

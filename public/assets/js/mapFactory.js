@@ -17,7 +17,7 @@
                                     })
     }
     mf.placeMarkers = function(scope,markers){
-      markers.forEach(function(user){
+      markers.forEach(function(marker){
         var marker = new google.maps.Marker({
           position : {
                         lat : user.location.coordinates[1],
@@ -29,6 +29,9 @@
         info.setContent(mf.infoWindowBuilder(user))
         info.open(scope.map,marker)
       })
+    }
+    mf.placePolygons = function(scope){
+      scope.map.data.loadGeoJson('/vital-api/v1/zip-codes')
     }
 
     return mf

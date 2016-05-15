@@ -8,13 +8,13 @@ buildingSchema = new Schema({
     city         : {type:String, required:true},
     zip          : {type:String, required:true}
   },
-  buildingType  : {type:String, required:true},
   taxValues : [{
-    year        : {type:Number, required:true},
-    grossValue  : {type:Number, required:true},
-    taxedValue  : {type:Number, required:true},
-    valueDelta  : {type:Number, required:true},
-    annualDelta : {type:Number, required:true}
+    year         : {type:Number, required:true},
+    buildingType : {type:String, required:true},
+    grossValue   : {type:Number, required:true},
+    taxedValue   : {type:Number, required:true},
+    valueDelta   : {type:Number, required:true},
+    annualDelta  : {type:Number, required:true}
   }]
 })
 

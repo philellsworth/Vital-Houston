@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 zipCodeSchema = new Schema({
   zipCode       : {type:Number, required:true},
-  geoJSON       : {type:String, required:true},
+  geoJSON       : {type:String},
   // array member - one element per year
   buildingStats : [{
     year        : {type:Number, required:true},
