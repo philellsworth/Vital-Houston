@@ -1,9 +1,9 @@
 ;(function(){
   'use strict'
   angular.module('vitalApp')
-          .factory('mapFactory', mapFactory)
+          .factory('mapFactory', ['$http',mapFactory])
 
-  function mapFactory(){
+  function mapFactory($http){
     var mf = {}
 
     mf.buildMap = function(scope,coords){
@@ -30,8 +30,35 @@
         info.open(scope.map,marker)
       })
     }
+
     mf.placePolygons = function(scope){
-      scope.map.data.loadGeoJson('/vital-api/v1/zip-codes')
+      $http.get('/vital-api/v1/zip-codes')
+            .then(function(response){
+              scope.layers.polygons = []
+              var polygons = response.data
+              polygons.forEach(function(polygon,index){
+                // find degree of nesting that contains the coordinate arrays
+                var gjCoords
+                if(typeof JSON.parse(polygon.geoJSON).coordinates[0][0][0] !== "object"){
+                  gjCoords = JSON.parse(polygon.geoJSON).coordinates[0]
+                }else if(typeof JSON.parse(polygon.geoJSON).coordinates[0][0][0][0] !== "object"){
+                  gjCoords = JSON.parse(polygon.geoJSON).coordinates[0][0]
+                }
+                // convert geoJSON coordinates to google polygon format
+                var googCoords = gjCoords.map(function(coord){
+                  return {lat:coord[1],lng:coord[0]}
+                })
+                // build polygon and assign to scope.map
+                var newPolygon = new google.maps.Polygon({
+                  paths     : googCoords,
+                  fillColor : '#2ecc71',
+                  strokeWeight : 0.8,
+                  zipcode : polygon.zipCode
+                })
+                newPolygon.setMap(scope.map)
+                scope.layers.propertyValueDeltas.push(newPolygon)
+              })
+            })
     }
 
     return mf

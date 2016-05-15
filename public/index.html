@@ -5,6 +5,7 @@
     <script type="text/javascript" src="/assets/js/app.js"></script>
     <script type="text/javascript" src="/assets/js/mapFactory.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFB3LZutMtzYNNfIWdpnUHg1WETg34TDM"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
     <link type="text/css" rel="stylesheet" href="/assets/css/styles.css">
   </head>
   <body ng-controller="mapController as mc">
@@ -14,7 +15,9 @@
     <main>
       <div id="map"></div>
       <div class="sidebar">
-
+        <div ng-repeat="layer in mc.layerProperties">
+          <input type="checkbox" ng-model="mc.layerEnabled.propertyValueDeltas" ng-click><label>Property Value Deltas</label>
+        </div>
       </div>
     </main>
     <footer>
