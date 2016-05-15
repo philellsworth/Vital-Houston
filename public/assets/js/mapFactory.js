@@ -31,10 +31,10 @@
       })
     }
 
-    mf.placePolygons = function(scope){
+    mf.placePolygons = function(scope,layers){
       $http.get('/vital-api/v1/zip-codes')
             .then(function(response){
-              scope.layers.polygons = []
+              scope.layers.propertyValueDeltas = []
               var polygons = response.data
               polygons.forEach(function(polygon,index){
                 // find degree of nesting that contains the coordinate arrays

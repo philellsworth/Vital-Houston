@@ -29,9 +29,10 @@ main{
   flex-direction: row;
 }
 #map{
-  flex: 4;
+  flex: 5;
 }
 .sidebar{
   background-color: #2980b9;
-  flex: 1;
+  flex: 2;
+  padding: 14px;
 }

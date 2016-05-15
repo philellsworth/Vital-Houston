@@ -16,7 +16,7 @@
       <div id="map"></div>
       <div class="sidebar">
         <div ng-repeat="layer in mc.layerProperties">
-          <input type="checkbox" ng-model="mc.layerEnabled.propertyValueDeltas" ng-click><label>Property Value Deltas</label>
+          <input type="checkbox" ng-model="layer.enabled" ng-click="mc.toggleEnabled(layer)"><label>{{layer.type}}</label>
         </div>
       </div>
     </main>
