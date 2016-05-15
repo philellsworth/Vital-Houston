@@ -5,16 +5,10 @@
 
   function mapController($http,mapFactory){
     var mc = this
-    mc.layerProperties = [{
-      type     : "Property Value Deltas",
-      propName : "propertyValueDeltas",
-      endPoint : '/vital-api/v1/zip-codes',
-      enabled  : true
-    }]
+    mc.layerProperties = []
     mc.layers = {}
 
     mc.toggleEnabled = function(layer){
-      console.log(layer)
       if(layer.enabled){
         mc.layers[layer.propName].forEach(function(mapObj){
           mapObj.setMap(mc.map)
@@ -25,11 +19,19 @@
         })
       }
     }
-
     navigator.geolocation.getCurrentPosition(function(position){
       mapFactory.buildMap(mc,position.coords)
-      mapFactory.placePolygons(mc,mc.layerProperties)
+      $http.get('/vital-api/v1/metadata')
+            .then(function(metaData){
+              mc.layerProperties = metaData.data
+              mc.layerProperties.forEach(function(layer){
+                if(layer.enabled && layer.dataTypes.indexOf("polygons")!==-1){
+                    mapFactory.placePolygons(mc,layer)
+                }else if(layer.enabled && layer.dataTypes.indexOf("markers")!==-1){
+                    mapFactory.placeMarkers(mc,layer)
+                }
+              })
+            })
     })
-
   }
 })()

@@ -16,25 +16,30 @@
                                       zoom   : 12
                                     })
     }
-    mf.placeMarkers = function(scope,markers){
-      markers.forEach(function(marker){
-        var marker = new google.maps.Marker({
-          position : {
-                        lat : user.location.coordinates[1],
-                        lng : user.location.coordinates[0]
-                      },
-          map      : scope.map
-        })
-        var info = new google.maps.InfoWindow({})
-        info.setContent(mf.infoWindowBuilder(user))
-        info.open(scope.map,marker)
-      })
+    mf.placeMarkers = function(scope,layer){
+      $http.get(layer.endPoint)
+            .then(function(response){
+              scope.layers[layer.propName] = []
+              var markers = response.data
+              markers.forEach(function(marker){
+                var coords = JSON.parse(marker.geoJSON).coordinates
+                console.log(coords)
+                var newMarker = new google.maps.Marker({
+                  position: {
+                    lat: coords[1],
+                    lng: coords[0]
+                  }
+                })
+                newMarker.setMap(scope.map)
+                scope.layers[layer.propName].push(newMarker)
+              })
+            })
     }
 
-    mf.placePolygons = function(scope,layers){
-      $http.get('/vital-api/v1/zip-codes')
+    mf.placePolygons = function(scope,layer){
+      $http.get(layer.endPoint)
             .then(function(response){
-              scope.layers.propertyValueDeltas = []
+              scope.layers[layer.propName] = []
               var polygons = response.data
               polygons.forEach(function(polygon,index){
                 // find degree of nesting that contains the coordinate arrays
@@ -56,7 +61,7 @@
                   zipcode : polygon.zipCode
                 })
                 newPolygon.setMap(scope.map)
-                scope.layers.propertyValueDeltas.push(newPolygon)
+                scope.layers[layer.propName].push(newPolygon)
               })
             })
     }

@@ -1,0 +1,21 @@
+[{
+  "type"     : "Property Value Deltas",
+  "propName" : "propertyValueDeltas",
+  "endPoint" : "/vital-api/v1/zip-codes",
+  "dataTypes": ["shapefiles","polygons","metadata"],
+  "enabled"  : true
+},
+{
+  "type"     : "Park Permits",
+  "propName" : "parkPermits",
+  "endPoint" : "/vital-api/v1/parks",
+  "dataTypes": ["shapefiles","markers","metadata"],
+  "enabled"  : true
+},
+{
+  "type"     : "Test",
+  "propName" : "testLayer",
+  "endPoint" : "/test",
+  "dataTypes": ["shapefiles","metadata"],
+  "enabled"  : false
+}]
